@@ -3,6 +3,8 @@ const numX = document.querySelector(".numX");
 const numO = document.querySelector(".numO");
 const winner_text = document.querySelector(".winner_text");
 const win_modal = document.querySelector(".win_modal");
+const cross = document.querySelectorAll(".cross");
+
 document.querySelector(".continue").addEventListener("click", () => {
   closeModal();
 });
@@ -24,6 +26,18 @@ function count() {
 count();
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let play = "&times;";
+
+function step(play) {
+  [...cross].forEach((el) => {
+    el.classList.remove("active");
+    if (el.innerHTML == "o" && play == "o") {
+      el.classList.add("active");
+    } else if (el.innerHTML !== "o" && play !== "o") {
+      el.classList.add("active");
+    }
+  });
+}
+step(play);
 ceil.forEach((el) => {
   el.addEventListener("click", (e) => {
     const num = e.target.classList[1];
@@ -40,6 +54,7 @@ ceil.forEach((el) => {
       }
     });
     play = play == "&times;" ? "o" : "&times;";
+    step(play);
   });
 });
 
@@ -105,4 +120,5 @@ function reset() {
   });
   arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   play = "&times;";
+  step(play);
 }
